@@ -64,9 +64,9 @@ class Viking(Soldier):
     """
 
     def __init__(self, name: str, health: int, strength: int):
+        super().__init__(health, strength)
+
         self.name: str = name
-        self.health: int = health
-        self.strength: int = strength
 
     def battle_cry(self) -> str:
         """Battle cry method."""
@@ -106,8 +106,7 @@ class Saxon(Soldier):
     """
 
     def __init__(self, health: int, strength: int):
-        self.health: int = health
-        self.strength: int = strength
+        super().__init__(health, strength)
 
     def receive_damage(self, damage: int) -> str:
         """Receive damage method.
