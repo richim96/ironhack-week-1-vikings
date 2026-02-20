@@ -40,7 +40,7 @@ def create_saxon_army(war: War, n_saxons: int = 12) -> None:
     """
 
     for _ in range(1, n_saxons):
-        great_war.add_saxon(Saxon(health=100, strength=random.randint(5, 80)))
+        war.add_saxon(Saxon(health=100, strength=random.randint(5, 80)))
 
 
 if __name__ == "__main__":   
