@@ -5,6 +5,7 @@
 ## How to test and run
 
 To test this project, first install the `uv` package manager (`brew install uv` will take care of you on Mac).
+Make sure to install the dependencies with `uv sync` after cloning the repository.
 
 Test:
 ```bash
