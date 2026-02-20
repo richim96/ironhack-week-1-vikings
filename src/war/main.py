@@ -1,6 +1,6 @@
 import random
 
-from vikingsClasses import Viking, Saxon, War
+from war.models import Viking, Saxon, War
 
 
 def create_viking_army(
@@ -20,7 +20,7 @@ def create_viking_army(
         Number of Viking soldiers.
     """
     
-    for i in range(1, n_vikings):
+    for _ in range(1, n_vikings):
         war.add_viking(Viking(
             name=names[random.randint(0, len(names) - 1)],
             health=240,
@@ -39,7 +39,7 @@ def create_saxon_army(war: War, n_saxons: int = 12) -> None:
         Number of Saxon soldiers.
     """
 
-    for i in range(1, n_saxons):
+    for _ in range(1, n_saxons):
         great_war.add_saxon(Saxon(health=100, strength=random.randint(5, 80)))
 
 
@@ -63,4 +63,4 @@ if __name__ == "__main__":
             f"Viking army: {len(great_war.viking_army)} warriors survived {[viking.name for viking in great_war.viking_army]}",
             f"- Saxon army: {len(great_war.saxon_army)} warriors survived"
         )
-        print(great_war.show_status())
+        print(great_war.show_status(), "\n")

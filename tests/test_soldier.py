@@ -1,15 +1,15 @@
 import unittest
-from vikingsClasses import Soldier
+
+from war.models.soldier import Soldier
 from inspect import signature
 
 
 class TestSoldier(unittest.TestCase):
 
-    @classmethod
-    def setUp(cls):
-        cls.strength = 150
-        cls.health = 300
-        cls.soldier = Soldier(cls.health, cls.strength)
+    def setUp(self):
+        self.strength = 150
+        self.health = 300
+        self.soldier = Soldier(self.health, self.strength)
 
     def testConstructorSignature(self):
         self.assertEqual(len(signature(Soldier).parameters), 2)

@@ -1,16 +1,16 @@
 import unittest
-from vikingsClasses import Viking
+
+from war.models import Viking
 from inspect import signature
 
 
 class TestViking(unittest.TestCase):
 
-    @classmethod
-    def setUp(cls):
-        cls.name = 'Harald'
-        cls.strength = 150
-        cls.health = 300
-        cls.viking = Viking(cls.name, cls.health, cls.strength)
+    def setUp(self):
+        self.name = 'Harald'
+        self.strength = 150
+        self.health = 300
+        self.viking = Viking(self.name, self.health, self.strength)
 
     def testShouldReciveThreeParams(self):
         self.assertEqual(len(signature(Viking).parameters), 3)

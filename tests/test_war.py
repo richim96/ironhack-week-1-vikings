@@ -1,13 +1,13 @@
 import unittest
-from vikingsClasses import War, Viking, Saxon
+
+from war.models import Viking, Saxon, War
 from inspect import signature
 
 
 class TestWar(unittest.TestCase):
 
-    @classmethod
-    def setUp(cls):
-        cls.war = War()
+    def setUp(self):
+        self.war = War()
 
     def testWarShouldReciveNoParams(self):
         self.assertEqual(len(signature(War).parameters), 0)
@@ -20,24 +20,23 @@ class TestWar(unittest.TestCase):
 
 
 class TestWar2(unittest.TestCase):
-    @classmethod
-    def setUp(cls):
+    def setUp(self):
         def generateViking():
-            cls.name = 'Harald'
-            cls.strength = 150
-            cls.health = 300
-            return Viking(cls.name, cls.health, cls.strength)
+            name = 'Harald'
+            health = 300
+            strength = 150
+            return Viking(name, health, strength)
 
         def generateSaxon():
-            cls.health = 60
-            cls.strength = 25
-            return Saxon(cls.health, cls.strength)
+            health = 60
+            strength = 25
+            return Saxon(health, strength)
 
-        cls.viking = generateViking()
-        cls.saxon = generateSaxon()
-        cls.war = War()
-        cls.war.add_saxon(cls.saxon)
-        cls.war.add_viking(cls.viking)
+        self.viking = generateViking()
+        self.saxon = generateSaxon()
+        self.war = War()
+        self.war.add_saxon(self.saxon)
+        self.war.add_viking(self.viking)
 
     def testAddViking(self):
         self.assertEqual(callable(self.war.add_viking), True)
@@ -70,9 +69,9 @@ class TestWar2(unittest.TestCase):
         self.assertEqual(len(signature(self.war.viking_attack).parameters), 0)
 
     def testSaxonHealth(self):
-        oldHealt = self.saxon.health
+        old_health = self.saxon.health
         self.war.viking_attack()
-        self.assertEqual(self.saxon.health, oldHealt - self.viking.strength)
+        self.assertEqual(self.saxon.health, old_health - self.viking.strength)
 
     def testVikingAttack(self):
         self.war.viking_attack()
@@ -89,12 +88,12 @@ class TestWar2(unittest.TestCase):
         self.assertEqual(len(signature(self.war.saxon_attack).parameters), 0)
 
     def testVikingHealth(self):
-        oldHealt = self.viking.health
+        old_health = self.viking.health
         self.war.saxon_attack()
-        self.assertEqual(self.viking.health, oldHealt - self.saxon.strength)
+        self.assertEqual(self.viking.health, old_health - self.saxon.strength)
 
     def testVikingArmyList(self):
-        for i in range(12):
+        for _ in range(12):
             if(len(self.war.viking_army) == 0):
                 break
             self.war.saxon_attack()
@@ -116,7 +115,7 @@ class TestWar2(unittest.TestCase):
                          'Vikings have won the war of the century!')
 
     def testShouldReturnStringSaxonsWon(self):
-        for i in range(12):
+        for _ in range(12):
             self.war.saxon_attack()
         self.assertEqual(self.war.show_status(
         ), 'Saxons have fought for their lives and survive another day...')

@@ -2,6 +2,20 @@
 
 # Mini Project | Vikings
 
+## How to test and run
+
+To test this project, first install the `uv` package manager (`brew install uv` will take care of you on Mac).
+
+Test:
+```bash
+uv run pytest -v
+```
+
+Run game:
+```bash
+uv run python src/war/main.py
+```
+
 ## Introduction
 
 The Vikings and the Saxons are at War. Both are Soldiers but they have their own methods to fight. Vikings are ported to Python. YAY!!
