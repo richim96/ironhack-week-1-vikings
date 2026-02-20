@@ -30,26 +30,26 @@ class TestSaxon(unittest.TestCase):
         self.assertEqual(self.saxon.attack(), self.strength)
 
     def testReceiveDamageIsFunction(self):
-        self.assertEqual(callable(self.saxon.receiveDamage), True)
+        self.assertEqual(callable(self.saxon.receive_damage), True)
 
     def testReceiveDamageShouldReceiveOneParam(self):
         self.assertEqual(
-            len(signature(self.saxon.receiveDamage).parameters), 1)
+            len(signature(self.saxon.receive_damage).parameters), 1)
 
     def testReceiveDamage(self):
-        self.saxon.receiveDamage(1)
+        self.saxon.receive_damage(1)
         self.assertEqual(self.saxon.health, self.health - 1)
 
     def testReceiveDamageString45(self):
-        self.assertEqual(self.saxon.receiveDamage(
+        self.assertEqual(self.saxon.receive_damage(
             45), 'A Saxon has received 45 points of damage')
 
     def testReceiveDamageString10(self):
-        self.assertEqual(self.saxon.receiveDamage(
+        self.assertEqual(self.saxon.receive_damage(
             10), 'A Saxon has received 10 points of damage')
 
     def testReceiveDamageStringDied(self):
-        self.assertEqual(self.saxon.receiveDamage(self.health),
+        self.assertEqual(self.saxon.receive_damage(self.health),
                          'A Saxon has died in combat')
 
 

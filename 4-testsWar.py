@@ -13,10 +13,10 @@ class TestWar(unittest.TestCase):
         self.assertEqual(len(signature(War).parameters), 0)
 
     def testVikingArmy(self):
-        self.assertEqual(self.war.vikingArmy, [])
+        self.assertEqual(self.war.viking_army, [])
 
     def testSaxonArmy(self):
-        self.assertEqual(self.war.saxonArmy, [])
+        self.assertEqual(self.war.saxon_army, [])
 
 
 class TestWar2(unittest.TestCase):
@@ -36,94 +36,94 @@ class TestWar2(unittest.TestCase):
         cls.viking = generateViking()
         cls.saxon = generateSaxon()
         cls.war = War()
-        cls.war.addSaxon(cls.saxon)
-        cls.war.addViking(cls.viking)
+        cls.war.add_saxon(cls.saxon)
+        cls.war.add_viking(cls.viking)
 
     def testAddViking(self):
-        self.assertEqual(callable(self.war.addViking), True)
+        self.assertEqual(callable(self.war.add_viking), True)
 
     def testAddVikingShouldReceiveOneParam(self):
-        self.assertEqual(len(signature(self.war.addViking).parameters), 1)
+        self.assertEqual(len(signature(self.war.add_viking).parameters), 1)
 
     def testAddVikingInList(self):
-        self.assertEqual(self.war.vikingArmy, [self.viking])
+        self.assertEqual(self.war.viking_army, [self.viking])
 
     def testAddVikingReturnNull(self):
-        self.assertEqual(self.war.addViking(self.viking), None)
+        self.assertEqual(self.war.add_viking(self.viking), None)
 
     def testAddSaxonShouldBeFunction(self):
-        self.assertEqual(callable(self.war.addSaxon), True)
+        self.assertEqual(callable(self.war.add_saxon), True)
 
     def testAddSaxonReceiveOneParam(self):
-        self.assertEqual(len(signature(self.war.addSaxon).parameters), 1)
+        self.assertEqual(len(signature(self.war.add_saxon).parameters), 1)
 
     def testSaxonArmyReturnEmptyList(self):
-        self.assertEqual(self.war.saxonArmy, [self.saxon])
+        self.assertEqual(self.war.saxon_army, [self.saxon])
 
     def testAddSaxonReturnNone(self):
-        self.assertEqual(self.war.addSaxon(self.saxon), None)
+        self.assertEqual(self.war.add_saxon(self.saxon), None)
 
     def testVikingAttackIsFunction(self):
-        self.assertEqual(callable(self.war.vikingAttack), True)
+        self.assertEqual(callable(self.war.viking_attack), True)
 
     def testVikingAttackReceiveNoParam(self):
-        self.assertEqual(len(signature(self.war.vikingAttack).parameters), 0)
+        self.assertEqual(len(signature(self.war.viking_attack).parameters), 0)
 
     def testSaxonHealth(self):
         oldHealt = self.saxon.health
-        self.war.vikingAttack()
+        self.war.viking_attack()
         self.assertEqual(self.saxon.health, oldHealt - self.viking.strength)
 
     def testVikingAttack(self):
-        self.war.vikingAttack()
-        self.assertEqual(len(self.war.saxonArmy), 0)
+        self.war.viking_attack()
+        self.assertEqual(len(self.war.saxon_army), 0)
 
     def testAddSaxon(self):
         print(self.war.__dict__)
-        self.assertEqual(self.war.vikingAttack(), 'A Saxon has died in combat')
+        self.assertEqual(self.war.viking_attack(), 'A Saxon has died in combat')
 
     def testSaxonAttackIsFunction(self):
-        self.assertEqual(callable(self.war.saxonAttack), True)
+        self.assertEqual(callable(self.war.saxon_attack), True)
 
     def testSaxonAttackReceiveNoParam(self):
-        self.assertEqual(len(signature(self.war.saxonAttack).parameters), 0)
+        self.assertEqual(len(signature(self.war.saxon_attack).parameters), 0)
 
     def testVikingHealth(self):
         oldHealt = self.viking.health
-        self.war.saxonAttack()
+        self.war.saxon_attack()
         self.assertEqual(self.viking.health, oldHealt - self.saxon.strength)
 
     def testVikingArmyList(self):
         for i in range(12):
-            if(len(self.war.vikingArmy) == 0):
+            if(len(self.war.viking_army) == 0):
                 break
-            self.war.saxonAttack()
-        self.assertEqual(len(self.war.vikingArmy), 0)
+            self.war.saxon_attack()
+        self.assertEqual(len(self.war.viking_army), 0)
 
     def testReturnOfSaxonAttack(self):
-        self.assertEqual(self.war.saxonAttack(), self.viking.name +
+        self.assertEqual(self.war.saxon_attack(), self.viking.name +
                          ' has received ' + str(self.saxon.strength) + ' points of damage')
 
     def testShowStatusShouldIsFunction(self):
-        self.assertEqual(callable(self.war.showStatus), True)
+        self.assertEqual(callable(self.war.show_status), True)
 
     def testShowStatusReceiveNoParams(self):
-        self.assertEqual(len(signature(self.war.showStatus).parameters), 0)
+        self.assertEqual(len(signature(self.war.show_status).parameters), 0)
 
     def testShouldReturnStringVikingsWon(self):
-        self.war.vikingAttack()
-        self.assertEqual(self.war.showStatus(),
+        self.war.viking_attack()
+        self.assertEqual(self.war.show_status(),
                          'Vikings have won the war of the century!')
 
     def testShouldReturnStringSaxonsWon(self):
         for i in range(12):
-            self.war.saxonAttack()
-        self.assertEqual(self.war.showStatus(
+            self.war.saxon_attack()
+        self.assertEqual(self.war.show_status(
         ), 'Saxons have fought for their lives and survive another day...')
 
     def testShouldReturnStringStillFighting(self):
         self.assertEqual(
-            self.war.showStatus(), 'Vikings and Saxons are still in the thick of battle.')
+            self.war.show_status(), 'Vikings and Saxons are still in the thick of battle.')
 
 
 if __name__ == '__main__':

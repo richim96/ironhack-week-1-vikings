@@ -30,17 +30,17 @@ class TestSoldier(unittest.TestCase):
         self.assertEqual(self.soldier.attack(), self.strength)
 
     def testReceivesDamage(self):
-        self.assertEqual(callable(self.soldier.receiveDamage), True)
+        self.assertEqual(callable(self.soldier.receive_damage), True)
 
     def testReceivesDamageHasParams(self):
         self.assertEqual(
-            len(signature(self.soldier.receiveDamage).parameters), 1)
+            len(signature(self.soldier.receive_damage).parameters), 1)
 
     def testReceiveDamageReturnNone(self):
-        self.assertEqual(self.soldier.receiveDamage(50), None)
+        self.assertEqual(self.soldier.receive_damage(50), None)
 
     def testCanReceiveDamage(self):
-        self.soldier.receiveDamage(50)
+        self.soldier.receive_damage(50)
         self.assertEqual(self.soldier.health, self.health - 50)
 
 
